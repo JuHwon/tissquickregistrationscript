@@ -18,20 +18,26 @@
         autoReload: false,
 
         // interval to refresh the page if register button not available
-        refreshInterval: 1000,
+        refreshInterval: 500,
 
         // course number
-        courseNumber: '188.916',
+        courseNumber: '180.764',
 
         // type of registration, available options: lva, group, exam
-        registrationType: 'lva',
+        registrationType: 'exam',
 
         // section of registration button, e.g. group name like "Gruppe 3", or name of exam
         // this option is not available with the registration type 'lva'
         registerSection: '',
 
+        // which section to choose if more than one section with the same name exists
+        // setting the value to null will just choose the first one found
+        // inSectionIndex: null -> first "registerSection" found will be chosen
+        // "inSectionIndex: 4" -> fourth section with name of "registerSection" will be chosen
+        inSectionIndex: null,
+
         // semester of the desired course
-        semester: '2016W',
+        semester: '2017W',
 
         // if you got multiple study codes, configure the desired one without the dot (e.g. 033526)
         studyCode: '',
@@ -40,9 +46,16 @@
         enableLog: true,
 
         // option to specify a time to start the script, it will reload the page at the specified time
-        // [year, month, day, hours, minutes, seconds, milliseconds]
-        // leave array empty to disable the specific startTime
-        startTime: [2016, 9 -1, 15, 6, 59]
+        // set to null to disable the specific startTime
+        startTime: {
+            year: 2018,
+            month: 2,
+            day: 18,
+
+            hour: 11,
+            minute: 59,
+            second: 50
+        }
     };
 
     var state = {
@@ -81,8 +94,8 @@
 
         // delay start if specified
         var timeToStart;
-        if (options.startTime.length > 0 &&
-            (timeToStart = new (Date.bind.apply(Date, [null].concat(options.startTime)))() - new Date()) > 0) {
+        if (options.startTime &&
+            (timeToStart = new getDate(options.startTime) - new Date()) > 0) {
             setTimeout(this.reloadPage, timeToStart);
             this.setCountDown(timeToStart);
         } else {
@@ -232,10 +245,10 @@
     var _sectionLabel;
     this.getSectionLabel = function() {
         if (!_sectionLabel) {
-            _sectionLabel = $(".groupWrapper .header_element span").filter(function () {
+            _sectionLabel = $(".groupWrapper .groupHeadertrigger span").filter(function () {
                 return $(this).text().trim() === options.registerSection;
             });
-            _sectionLabel = _sectionLabel.length > 1 ? _sectionLabel.first() : _sectionLabel;
+            _sectionLabel = _sectionLabel.length > 1 ? $(_sectionLabel[(options.inSectionIndex - 1) || 0]) : _sectionLabel;
         }
         return _sectionLabel;
     };
@@ -361,6 +374,17 @@
                     return this.nodeType === Node.TEXT_NODE;
                 });
         };
+    };
+
+    this.getDate = function(date) {
+        return new Date(
+            date.year,
+            date.month-1,
+            date.day,
+            date.hour,
+            date.minute,
+            date.second
+        );
     };
 
     //////////////////////// Validation
