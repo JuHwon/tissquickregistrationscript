@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       TISS Registration Madness
 // @namespace  JuHwon
-// @version    1.0
+// @version    1.1
 // @description  Just Madness
 // @match      https://tiss.tuwien.ac.at/*
 // @copyright  2016+, JuHwon
