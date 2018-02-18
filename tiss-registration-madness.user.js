@@ -248,7 +248,9 @@
             _sectionLabel = $(".groupWrapper .groupHeadertrigger span").filter(function () {
                 return $(this).text().trim() === options.registerSection;
             });
-            _sectionLabel = _sectionLabel.length > 1 ? $(_sectionLabel[(options.inSectionIndex - 1) || 0]) : _sectionLabel;
+            _sectionLabel = _sectionLabel.length > 1
+                ? $(_sectionLabel[options.inSectionIndex == null ? 0 : (options.inSectionIndex - 1)])
+                : _sectionLabel;
         }
         return _sectionLabel;
     };
