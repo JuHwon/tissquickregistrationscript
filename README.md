@@ -1,6 +1,8 @@
 # :zap: tiss-registration-madness :zap:
 TISS Registration Script
 
+This project is influenced by [https://github.com/mangei/tissquickregistrationscript](https://github.com/mangei/tissquickregistrationscript)
+
 ![Demo](https://cloud.githubusercontent.com/assets/9406772/18539063/77b3aaf8-7b14-11e6-996b-854570429be6.gif)
 
 ## Requirements
