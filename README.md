@@ -19,4 +19,3 @@ This project is influenced by [https://github.com/mangei/tissquickregistrationsc
 4. Enable the script
 5. Pray :pray:
 
->>>>>>> mine/master
