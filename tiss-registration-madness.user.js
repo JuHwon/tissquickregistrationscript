@@ -98,6 +98,7 @@
             (timeToStart = new getDate(options.startTime) - new Date()) > 0) {
             setTimeout(this.reloadPage, timeToStart);
             this.setCountDown(timeToStart);
+            this.highlightElement(this.getSectionLabel());
         } else {
             this.injectArea(LOG_AREA_ID, LOG_AREA_SYLE, 'Information Log');
             this.injectArea(ERROR_AREA_ID, ERROR_AREA_STYLE);
